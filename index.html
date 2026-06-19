@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Congratulations, Wateen! 🎓</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --shinobu-purple: #9b59b6;
+      --shinobu-teal: #48c9b0;
+      --killua-blue: #5dade2;
+      --killua-electric: #a8e6ff;
+      --gold: #f4d03f;
+      --bg-dark: #0d0a1a;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Nunito", sans-serif;
+      background: radial-gradient(ellipse at 20% 20%, #1a1035 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 80%, #0a1a2e 0%, transparent 50%),
+                  var(--bg-dark);
+      color: #f5f0ff;
+      overflow-x: hidden;
+    }
+
+    /* Floating butterflies */
+    .butterflies {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .butterfly {
+      position: absolute;
+      font-size: 1.4rem;
+      opacity: 0.35;
+      animation: float-butterfly linear infinite;
+    }
+
+    @keyframes float-butterfly {
+      0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+      10%  { opacity: 0.35; }
+      90%  { opacity: 0.35; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Electric sparks */
+    .sparks {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .spark {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: var(--killua-electric);
+      border-radius: 50%;
+      box-shadow: 0 0 6px 2px var(--killua-blue);
+      animation: spark-flicker ease-in-out infinite;
+    }
+
+    @keyframes spark-flicker {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50%       { opacity: 1; transform: scale(1); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 3rem;
+      text-align: center;
+    }
+
+    /* Header */
+    .header {
+      margin-bottom: 2.5rem;
+      animation: fade-down 1s ease both;
+    }
+
+    @keyframes fade-down {
+      from { opacity: 0; transform: translateY(-30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gold), #e67e22);
+      color: #1a0a00;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.4rem 1.2rem;
+      border-radius: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-family: "Cinzel", serif;
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      background: linear-gradient(135deg, var(--gold) 0%, #fff 40%, var(--shinobu-teal) 80%, var(--killua-blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: 0.6rem;
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: #c8b8e8;
+      font-weight: 600;
+    }
+
+    .subtitle span {
+      color: var(--gold);
+    }
+
+    /* Character grid */
+    .characters {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 2.5rem 0;
+    }
+
+    @media (max-width: 700px) {
+      .characters { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      position: relative;
+      border-radius: 1.5rem;
+      padding: 2rem 1.5rem 1.5rem;
+      animation: fade-up 0.8s ease both;
+    }
+
+    .card.shinobu {
+      background: linear-gradient(160deg, rgba(155, 89, 182, 0.25) 0%, rgba(72, 201, 176, 0.1) 100%);
+      border: 1px solid rgba(155, 89, 182, 0.4);
+      box-shadow: 0 0 40px rgba(155, 89, 182, 0.2), inset 0 1px 0 rgba(255,255,255,0.08);
+      animation-delay: 0.3s;
+    }
+
+    .card.killua {
+      background: linear-gradient(160deg, rgba(93, 173, 226, 0.25) 0%, rgba(168, 230, 255, 0.08) 100%);
+      border: 1px solid rgba(93, 173, 226, 0.4);
+      box-shadow: 0 0 40px rgba(93, 173, 226, 0.2), inset 0 1px 0 rgba(255,255,255,0.08);
+      animation-delay: 0.5s;
+    }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-label {
+      font-family: "Cinzel", serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      opacity: 0.7;
+    }
+
+    .card.shinobu .card-label { color: var(--shinobu-teal); }
+    .card.killua .card-label  { color: var(--killua-electric); }
+
+    .char-img-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1.2rem;
+    }
+
+    .char-img {
+      width: clamp(160px, 30vw, 220px);
+      height: clamp(160px, 30vw, 220px);
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      transition: transform 0.4s ease;
+    }
+
+    .card.shinobu .char-img {
+      border-color: var(--shinobu-purple);
+      box-shadow: 0 0 25px rgba(155, 89, 182, 0.5);
+    }
+
+    .card.killua .char-img {
+      border-color: var(--killua-blue);
+      box-shadow: 0 0 25px rgba(93, 173, 226, 0.5);
+    }
+
+    .char-img-wrap:hover .char-img {
+      transform: scale(1.05);
+    }
+
+    /* Speech bubble */
+    .speech {
+      position: relative;
+      padding: 1.2rem 1.4rem;
+      border-radius: 1.2rem;
+      font-size: clamp(0.9rem, 2vw, 1.05rem);
+      line-height: 1.6;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .card.shinobu .speech {
+      background: rgba(155, 89, 182, 0.2);
+      border: 1px solid rgba(72, 201, 176, 0.3);
+      color: #e8d5f5;
+    }
+
+    .card.killua .speech {
+      background: rgba(93, 173, 226, 0.2);
+      border: 1px solid rgba(168, 230, 255, 0.3);
+      color: #d6eeff;
+    }
+
+    .speech::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 10px solid transparent;
+    }
+
+    .card.shinobu .speech::before {
+      border-bottom-color: rgba(155, 89, 182, 0.2);
+    }
+
+    .card.killua .speech::before {
+      border-bottom-color: rgba(93, 173, 226, 0.2);
+    }
+
+    .speech em {
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    .card.shinobu .speech em { color: var(--shinobu-teal); }
+    .card.killua .speech em  { color: var(--killua-electric); }
+
+    .char-name {
+      font-family: "Cinzel", serif;
+      font-size: 1.1rem;
+      margin-top: 0.8rem;
+      opacity: 0.85;
+    }
+
+    /* Footer message */
+    .final-message {
+      background: linear-gradient(135deg, rgba(244, 208, 63, 0.12), rgba(155, 89, 182, 0.1), rgba(93, 173, 226, 0.1));
+      border: 1px solid rgba(244, 208, 63, 0.3);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      margin-top: 1rem;
+      animation: fade-up 1s ease 0.7s both;
+    }
+
+    .final-message p {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      line-height: 1.7;
+      color: #e0d4f8;
+    }
+
+    .final-message .big {
+      font-family: "Cinzel", serif;
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .confetti-btn {
+      margin-top: 1.5rem;
+      padding: 0.8rem 2rem;
+      font-family: "Nunito", sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1a0a00;
+      background: linear-gradient(135deg, var(--gold), #e67e22);
+      border: none;
+      border-radius: 2rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(244, 208, 63, 0.4);
+    }
+
+    .confetti-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 30px rgba(244, 208, 63, 0.6);
+    }
+
+    .attribution {
+      margin-top: 2rem;
+      font-size: 0.7rem;
+      color: rgba(200, 184, 232, 0.4);
+      line-height: 1.6;
+    }
+
+    .attribution a {
+      color: rgba(200, 184, 232, 0.55);
+      text-decoration: none;
+    }
+
+    .attribution a:hover { text-decoration: underline; }
+
+    /* Confetti particles */
+    .confetti-piece {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top: -10px;
+      z-index: 999;
+      pointer-events: none;
+      animation: confetti-fall linear forwards;
+    }
+
+    @keyframes confetti-fall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="butterflies" id="butterflies"></div>
+  <div class="sparks" id="sparks"></div>
+
+  <div class="container">
+    <header class="header">
+      <div class="badge">🎓 Class of 2026</div>
+      <h1>Congratulations, Wateen!</h1>
+      <p class="subtitle">You did it, Wateen — <span>16 years old</span> and school is officially finished! 🎉</p>
+    </header>
+
+    <div class="characters">
+
+      <!-- Shinobu -->
+      <div class="card shinobu">
+        <div class="card-label">🦋 Insect Hashira</div>
+        <div class="char-img-wrap">
+          <img
+            class="char-img"
+            src="https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/0/01/Shinobu_colored_profile.png/revision/latest/scale-to-width-down/500?cb=20181211180934"
+            alt="Shinobu Kocho from Demon Slayer"
+          />
+        </div>
+        <div class="speech">
+          "Ara ara~ Well done, Wateen. You've worked so hard, and now your future is blooming beautifully — just like butterfly wings. <em>Congratulations, Wateen!</em> I'm so proud of you~ 🦋"
+        </div>
+        <div class="char-name">— Shinobu Kocho</div>
+      </div>
+
+      <!-- Killua -->
+      <div class="card killua">
+        <div class="card-label">⚡ Assassin &amp; Best Friend</div>
+        <div class="char-img-wrap">
+          <img
+            class="char-img"
+            src="https://static.wikia.nocookie.net/hunterxhunter/images/6/65/Killua_Zoldyck_HE_Portrait.png/revision/latest/scale-to-width-down/500?cb=20181225145242"
+            alt="Killua Zoldyck from Hunter x Hunter"
+          />
+        </div>
+        <div class="speech">
+          "Yo, Wateen! You actually did it — school is DONE. That took real guts. Now the fun part starts. Go chase whatever adventure you want next. <em>Congrats, Wateen!</em> ⚡"
+        </div>
+        <div class="char-name">— Killua Zoldyck</div>
+      </div>
+
+    </div>
+
+    <div class="final-message">
+      <span class="big">Wateen, you're amazing.</span>
+      <p>
+        Finishing school at 16 is no small thing, Wateen — it takes dedication, late nights, and a whole lot of heart.
+        Shinobu and Killua are cheering you on, and so is everyone who believes in you.
+        The world is wide open now. Go make it yours, Wateen. ✨
+      </p>
+      <button class="confetti-btn" onclick="launchConfetti()">🎊 Celebrate!</button>
+    </div>
+
+    <p class="attribution">
+      Character artwork sourced from
+      <a href="https://kimetsu-no-yaiba.fandom.com/wiki/Shinobu_Kocho/Image_Gallery" target="_blank" rel="noopener">Kimetsu no Yaiba Wiki</a>
+      &amp;
+      <a href="https://hunterxhunter.fandom.com/wiki/Killua_Zoldyck/Image_Gallery" target="_blank" rel="noopener">Hunterpedia</a>.
+      Characters © their respective creators.
+    </p>
+  </div>
+
+  <script>
+    // Butterflies
+    const butterfliesEl = document.getElementById("butterflies");
+    for (let i = 0; i < 12; i++) {
+      const b = document.createElement("div");
+      b.className = "butterfly";
+      b.textContent = "🦋";
+      b.style.left = Math.random() * 100 + "%";
+      b.style.animationDuration = (8 + Math.random() * 12) + "s";
+      b.style.animationDelay = (Math.random() * 10) + "s";
+      butterfliesEl.appendChild(b);
+    }
+
+    // Electric sparks
+    const sparksEl = document.getElementById("sparks");
+    for (let i = 0; i < 20; i++) {
+      const s = document.createElement("div");
+      s.className = "spark";
+      s.style.left = Math.random() * 100 + "%";
+      s.style.top = Math.random() * 100 + "%";
+      s.style.animationDuration = (1.5 + Math.random() * 3) + "s";
+      s.style.animationDelay = (Math.random() * 5) + "s";
+      sparksEl.appendChild(s);
+    }
+
+    // Confetti
+    const colors = ["#9b59b6", "#48c9b0", "#5dade2", "#a8e6ff", "#f4d03f", "#e67e22", "#fff"];
+
+    function launchConfetti() {
+      for (let i = 0; i < 80; i++) {
+        const piece = document.createElement("div");
+        piece.className = "confetti-piece";
+        piece.style.left = Math.random() * 100 + "vw";
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.borderRadius = Math.random() > 0.5 ? "50%" : "2px";
+        piece.style.width = (6 + Math.random() * 8) + "px";
+        piece.style.height = (6 + Math.random() * 8) + "px";
+        piece.style.animationDuration = (2 + Math.random() * 3) + "s";
+        piece.style.animationDelay = (Math.random() * 0.5) + "s";
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 6000);
+      }
+    }
+
+    // Auto confetti on load
+    window.addEventListener("load", () => setTimeout(launchConfetti, 800));
+  </script>
+</body>
+</html>
